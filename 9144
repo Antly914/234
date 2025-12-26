@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蜜雪冰城员工排班智能助手</title>
+    <!-- 1. 先引入Coze Web SDK（嵌入核心：优先加载SDK） -->
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background-color: #f7f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: #ff6700; /* 蜜雪冰城橙色调 */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Coze聊天组件容器（适配原有样式） */
+        .coze-chat-container {
+            height: 400px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+        }
+
+        /* 功能区样式 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .feature {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature h3 {
+            color: #ff6700;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 适配移动端 */
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .coze-chat-container {
+                height: 300px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>蜜雪冰城员工排班智能助手</h1>
+            <p>高效制定排班计划，合规性自动分析</p>
+        </header>
+        
+        <!-- 2. Coze智能体聊天容器（替换原有模拟聊天框，保留样式适配） -->
+        <div class="coze-chat-container" id="cozeChat"></div>
+        
+        <!-- 功能区（保留原有） -->
+        <div class="features">
+            <div class="feature">
+                <h3>智能排班生成</h3>
+                <p>根据员工人数、营业时间自动生成合理排班表</p>
+            </div>
+            <div class="feature">
+                <h3>班次查询</h3>
+                <p>快速查询任意员工的班次安排，支持周/月维度</p>
+            </div>
+            <div class="feature">
+                <h3>合规分析</h3>
+                <p>检测排班是否符合劳动法，避免超时、缺岗问题</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 3. 初始化Coze Web SDK（嵌入核心：替换原有模拟JS，保留页面风格）
+        new CozeWebSDK.WebChatClient({
+            // 挂载到指定容器，适配原有样式
+            container: document.getElementById('cozeChat'),
+            config: {
+                bot_id: '7587716460324159534', // 你的智能体ID（保留）
+                locale: 'zh-CN', // 中文语言
+            },
+            componentProps: {
+                title: '蜜雪冰城排班助手', // 替换默认标题为品牌名称
+                theme: {
+                    primaryColor: '#ff6700', // 适配蜜雪冰城橙色品牌色
+                },
+                showAvatar: true, // 显示头像
+                showTitle: true, // 显示标题栏
+            },
+            auth: {
+                type: 'token',
+                token: 'pat_********', // 🔴 替换为你的真实token（必填）
+                onRefreshToken: function () {
+                    // 🔴 替换为你的token刷新逻辑（可选，若无刷新需求可删除此函数）
+                    return 'pat_********';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
